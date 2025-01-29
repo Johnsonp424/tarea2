@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Variables
+DOCKER_USER="tu_usuario_dockerhub"
+
+# Construcción de imágenes
+echo "Compilando imágenes Docker..."
+docker build -t $DOCKER_USER/user-service:latest ./user_service
+docker build -t $DOCKER_USER/notification-service:latest ./notification_service
+
+# Subir imágenes a Docker Hub
+echo "Subiendo imágenes a Docker Hub..."
+docker login -u $DOCKER_USER
+docker push $DOCKER_USER/user-service:latest
+docker push $DOCKER_USER/notification-service:latest
+
+echo "Proceso completado!"
